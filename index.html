@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivencias Juveniles: Una Exploración Interactiva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover {
+            color: #C77856;
+            border-bottom-color: #C77856;
+        }
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header id="home" class="bg-white/80 backdrop-blur-md sticky top-0 z-40">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-[#3A3A3A]">Vivencias Juveniles</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#atemporales" class="nav-link text-gray-600 border-b-2 border-transparent">Pasado</a>
+                <a href="#modernos" class="nav-link text-gray-600 border-b-2 border-transparent">Presente</a>
+                <a href="#resiliencia" class="nav-link text-gray-600 border-b-2 border-transparent">Resiliencia</a>
+                <a href="#futuro" class="nav-link text-gray-600 border-b-2 border-transparent">Futuro</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#atemporales" class="block py-2 text-gray-600">Pasado</a>
+            <a href="#modernos" class="block py-2 text-gray-600">Presente</a>
+            <a href="#resiliencia" class="block py-2 text-gray-600">Resiliencia</a>
+            <a href="#futuro" class="block py-2 text-gray-600">Futuro</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-16 md:py-24 text-center bg-white">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-bold text-[#3A3A3A] mb-4">Una Mirada a la Juventud</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Una exploración interactiva que conecta las vivencias juveniles a través del tiempo, desde narrativas ancestrales hasta los desafíos y oportunidades del mundo digital.</p>
+            </div>
+        </section>
+
+        <section id="atemporales" class="py-16 md:py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#3A3A3A]">Desafíos Atemporales</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">Las historias del pasado ofrecen un espejo para comprender las luchas universales de la juventud: la traición, la búsqueda de propósito, la resiliencia y la fe. Esta sección explora figuras arquetípicas cuyas vivencias nos enseñan lecciones perdurables sobre el carácter y el destino.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card-archetype bg-white p-6 rounded-lg shadow-sm cursor-pointer card-hover" data-archetype="jose">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">José</h3>
+                        <p class="text-gray-600">Traición, resiliencia y el descubrimiento de un propósito mayor en medio de la adversidad.</p>
+                    </div>
+                    <div class="card-archetype bg-white p-6 rounded-lg shadow-sm cursor-pointer card-hover" data-archetype="david">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">David</h3>
+                        <p class="text-gray-600">Del anonimato al liderazgo, enfrentando gigantes externos e internos.</p>
+                    </div>
+                    <div class="card-archetype bg-white p-6 rounded-lg shadow-sm cursor-pointer card-hover" data-archetype="samuel">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Samuel</h3>
+                        <p class="text-gray-600">Aprendiendo a escuchar una vocación en un entorno moralmente ambiguo.</p>
+                    </div>
+                    <div class="card-archetype bg-white p-6 rounded-lg shadow-sm cursor-pointer card-hover" data-archetype="rut">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Rut</h3>
+                        <p class="text-gray-600">La lealtad y la proactividad como caminos para transformar la pérdida en oportunidad.</p>
+                    </div>
+                    <div class="card-archetype bg-white p-6 rounded-lg shadow-sm cursor-pointer card-hover" data-archetype="daniel">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Daniel</h3>
+                        <p class="text-gray-600">Mantener la integridad y las convicciones en una cultura dominante y hostil.</p>
+                    </div>
+                    <div class="card-archetype bg-white p-6 rounded-lg shadow-sm cursor-pointer card-hover" data-archetype="sansón">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Sansón</h3>
+                        <p class="text-gray-600">El don extraordinario y la lucha con la debilidad personal y el propósito.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="modernos" class="py-16 md:py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#3A3A3A]">El Laberinto Moderno</h2>
+                 <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">La juventud contemporánea navega un panorama complejo de presiones digitales, desafíos de salud mental y dinámicas sociales en constante cambio. Esta sección profundiza en las vivencias clave que definen a los jóvenes de hoy, ofreciendo datos y contexto para entender su mundo.</p>
+                <div class="max-w-4xl mx-auto">
+                    <div class="border-b border-gray-200 mb-8">
+                        <nav class="-mb-px flex flex-wrap justify-center space-x-2 sm:space-x-8" aria-label="Tabs">
+                            <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-[#C77856] text-[#C77856]" data-tab="salud">Salud Mental</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="social">Presiones Sociales</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="familia">Familia y Relaciones</button>
+                        </nav>
+                    </div>
+                    <div id="salud" class="tab-content">
+                        <h3 class="text-2xl font-bold text-center mb-6">La Epidemia Silenciosa</h3>
+                        <p class="text-center text-gray-600 mb-8">La salud mental es uno de los mayores desafíos para la juventud actual. La ansiedad, la depresión y el estrés son experiencias comunes, con consecuencias que pueden extenderse a la vida adulta. Los datos muestran una realidad preocupante que requiere atención y apoyo.</p>
+                        <div class="chart-container">
+                            <canvas id="mentalHealthChart"></canvas>
+                        </div>
+                         <p class="text-sm text-gray-500 text-center mt-4">Datos clave sobre la prevalencia de problemas de salud mental en jóvenes (10-19 años).</p>
+                    </div>
+                    <div id="social" class="tab-content hidden">
+                        <h3 class="text-2xl font-bold text-center mb-6">Presiones Sociales y Mundos Digitales</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">El mundo digital ha transformado la interacción social. Las redes sociales son un arma de doble filo: conectan, pero también exponen a los jóvenes a la comparación constante, al ciberacoso y a la presión por proyectar una vida idealizada. Este fenómeno, conocido como FOMO (Miedo a Perderse Algo), junto con la presión de grupo y el acceso a sustancias, crea un entorno de alta presión.</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><span class="font-semibold">Comparación social:</span> La exposición a vidas "perfectas" en línea daña la autoestima.</li>
+                            <li><span class="font-semibold">Ciberacoso y FOMO:</span> El acoso digital y la ansiedad por la exclusión son riesgos reales.</li>
+                            <li><span class="font-semibold">Conductas de riesgo:</span> La presión de grupo puede influir en el consumo de sustancias y en decisiones perjudiciales.</li>
+                        </ul>
+                    </div>
+                    <div id="familia" class="tab-content hidden">
+                        <h3 class="text-2xl font-bold text-center mb-6">Dinámicas Familiares y Primeras Relaciones</h3>
+                         <p class="text-gray-600 mb-6 leading-relaxed">La familia es el primer núcleo social, y sus dinámicas dejan una huella profunda. El divorcio, las altas expectativas parentales o la falta de comunicación pueden generar estrés. Al mismo tiempo, las primeras relaciones románticas son un campo de aprendizaje crucial para la intimidad y la comunicación, pero también pueden ser una fuente de conflicto y vulnerabilidad.</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                           <li><span class="font-semibold">Impacto familiar:</span> La comunicación y el apoyo familiar son factores protectores clave.</li>
+                           <li><span class="font-semibold">Relaciones románticas:</span> Son una parte vital del desarrollo, pero conllevan desafíos como los celos y el manejo de conflictos.</li>
+                           <li><span class="font-semibold">Autonomía:</span> El proceso de independizarse de la familia es una transición fundamental y a menudo compleja.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resiliencia" class="py-16 md:py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#3A3A3A]">Construyendo Resiliencia</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">Ante la adversidad, los jóvenes desarrollan una asombrosa capacidad de adaptación. La resiliencia no es innata, se construye a través de herramientas, relaciones y la búsqueda de sentido. Esta sección explora las estrategias y los sistemas de apoyo que ayudan a los jóvenes a navegar los desafíos de la vida y a salir fortalecidos.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Manejo del Estrés</h3>
+                        <p class="text-gray-600">Técnicas como el mindfulness, el ejercicio físico y una buena gestión del tiempo son claves para afrontar la presión académica y social.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Sistemas de Apoyo</h3>
+                        <p class="text-gray-600">Una red sólida de familia, amigos y mentores proporciona un anclaje emocional fundamental para el bienestar.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Asertividad y Límites</h3>
+                        <p class="text-gray-600">Aprender a decir "no" a la presión negativa y a establecer límites saludables en las relaciones, tanto online como offline.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Acción Proactiva</h3>
+                        <p class="text-gray-600">Tomar la iniciativa para resolver problemas, ya sea buscando ayuda profesional, desarrollando planes o emprendiendo proyectos personales.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Búsqueda de Sentido</h3>
+                        <p class="text-gray-600">Encontrar un propósito a través de la fe, la espiritualidad, el voluntariado o el activismo por causas sociales.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-xl mb-2 text-[#C77856]">Reencuadre Cognitivo</h3>
+                        <p class="text-gray-600">La capacidad de reinterpretar las experiencias difíciles para encontrar lecciones y significado, transformando la adversidad en crecimiento.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="futuro" class="py-16 md:py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#3A3A3A]">Hacia el Futuro</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">La transición a la vida adulta es un viaje de aspiraciones y desarrollo de la autonomía. Los jóvenes de hoy se enfrentan a un mercado laboral en constante cambio y a la necesidad de adquirir nuevas habilidades. Su camino hacia la independencia está marcado por la incertidumbre, pero también por un enorme potencial para la innovación y el emprendimiento.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#3A3A3A] text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Exploración de Vivencias Juveniles. Creado a partir del informe de investigación.</p>
+        </div>
+    </footer>
+
+    <div id="archetype-modal" class="modal fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+            <div id="modal-content" class="p-8">
+            </div>
+            <div class="px-8 py-4 bg-gray-50 text-right">
+                 <button id="modal-close-button" class="bg-[#C77856] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('border-[#C77856]', 'text-[#C77856]');
+                        btn.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    });
+                    button.classList.add('border-[#C77856]', 'text-[#C77856]');
+                    button.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    
+                    const tabId = button.dataset.tab;
+                    tabContents.forEach(content => {
+                        if (content.id === tabId) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            
+            const mentalHealthData = {
+                labels: ['Cualquier Trastorno Mental', 'Depresión/Ansiedad', 'Suicidio (15-29 años)'],
+                datasets: [{
+                    label: 'Prevalencia / Ranking',
+                    data: [14, 80, 3], 
+                    backgroundColor: [
+                        'rgba(215, 137, 102, 0.6)',
+                        'rgba(146, 153, 162, 0.6)',
+                        'rgba(199, 120, 86, 0.8)',
+                    ],
+                    borderColor: [
+                        'rgba(215, 137, 102, 1)',
+                        'rgba(146, 153, 162, 1)',
+                        'rgba(199, 120, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            const mentalHealthConfig = {
+                type: 'bar',
+                data: mentalHealthData,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                             ticks: {
+                                callback: function(value, index, values) {
+                                    if (this.getLabelForValue(value).includes('Trastorno') || this.getLabelForValue(value).includes('Suicidio')) {
+                                         return value;
+                                    }
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        y: {
+                           ticks: {
+                                autoSkip: false,
+                                callback: function(value, index, values) {
+                                    const label = this.getLabelForValue(value);
+                                    if (label.length > 20) {
+                                        return label.match(/.{1,16}/g) || [];
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    let value = context.raw;
+                                    if(context.label.includes('Mental')){
+                                        return `1 de cada 7 jóvenes (${value}%)`;
+                                    }
+                                    if(context.label.includes('Depresión')){
+                                        return `Causa principal de discapacidad (Dato cualitativo)`;
+                                    }
+                                    if(context.label.includes('Suicidio')){
+                                        return `3ª causa de muerte`;
+                                    }
+                                    return label + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            const ctx = document.getElementById('mentalHealthChart').getContext('2d');
+            new Chart(ctx, mentalHealthConfig);
+
+            const archetypesData = {
+                jose: {
+                    title: "José: Traición y Propósito",
+                    content: `
+                        <p class="mb-4"><b>Vivencia:</b> Marcado por el favoritismo de su padre y sus propios sueños proféticos, fue traicionado por sus hermanos y vendido como esclavo. En Egipto, enfrentó falsas acusaciones y encarcelamiento injusto, pero su integridad y sabiduría para interpretar sueños lo llevaron al poder.</p>
+                        <p class="mb-4"><b>Impacto y Afrontamiento:</b> A pesar del trauma del abandono, José mantuvo una brújula moral interna. Su resiliencia se basó en reinterpretar su sufrimiento bajo una lente de propósito divino, creyendo que Dios lo había puesto en esa posición para salvar vidas. Esto le permitió perdonar y reconciliarse.</p>
+                        <p><b>Implicaciones:</b> La adversidad temprana, incluso severa, no define el futuro. Un marco moral interno y la capacidad de encontrar significado en el sufrimiento son factores de protección poderosos que fomentan una resiliencia que va más allá de la simple supervivencia.</p>
+                    `
+                },
+                david: {
+                    title: "David: Coraje y Persecución",
+                    content: `
+                        <p class="mb-4"><b>Vivencia:</b> Elegido inesperadamente para ser rey, su juventud se definió por un acto de fe y valentía al enfrentarse a Goliat. Esta victoria, sin embargo, desató la envidia del rey Saúl, quien lo persiguió implacablemente durante años, obligándolo a vivir como un fugitivo.</p>
+                        <p class="mb-4"><b>Impacto y Afrontamiento:</b> La persecución le causó un estrés inmenso, pero fortaleció su dependencia de la guía divina. Canalizó su angustia a través de la oración y tomó decisiones morales complejas, como perdonarle la vida a su perseguidor, basándose en principios superiores.</p>
+                        <p><b>Implicaciones:</b> El verdadero potencial puede surgir de lugares inesperados y el coraje a menudo se basa en la fe más que en la habilidad. Un marco moral y espiritual sólido puede guiar las decisiones en tiempos de incertidumbre extrema.</p>
+                    `
+                },
+                samuel: {
+                    title: "Samuel: Vocación en la Corrupción",
+                    content: `
+                        <p class="mb-4"><b>Vivencia:</b> Criado en el templo bajo la tutela de un sacerdote cuyos hijos eran corruptos, Samuel aprendió a escuchar la voz de Dios en un entorno moralmente comprometido. Su primera tarea fue comunicar un difícil mensaje de juicio a su propio mentor.</p>
+                        <p class="mb-4"><b>Impacto y Afrontamiento:</b> La experiencia le infundió un profundo sentido de responsabilidad y asombro. Su afrontamiento se basó en la obediencia y la valentía para transmitir la verdad, incluso cuando era difícil.</p>
+                        <p><b>Implicaciones:</b> Se puede desarrollar una fuerte sensibilidad moral y espiritual incluso en un ambiente negativo. La disposición a escuchar y un espíritu enseñable son más cruciales para el crecimiento que un entorno perfecto.</p>
+                    `
+                },
+                 rut: {
+                    title: "Rut: Lealtad y Nuevos Comienzos",
+                    content: `
+                        <p class="mb-4"><b>Vivencia:</b> Viuda, extranjera y en la pobreza, Rut tomó la audaz decisión de permanecer leal a su suegra, Noemí, y adoptar a su pueblo y a su Dios. En una nueva tierra, trabajó diligentemente para proveer, mostrando iniciativa y confianza.</p>
+                        <p class="mb-4"><b>Impacto y Afrontamiento:</b> Su afrontamiento se basó en una lealtad inquebrantable que le proporcionó un anclaje relacional, una ética de trabajo proactiva y una apertura a la guía y las costumbres de su nueva comunidad.</p>
+                        <p><b>Implicaciones:</b> La lealtad, el esfuerzo proactivo y la apertura a la fe y a una nueva comunidad pueden transformar la pérdida y la marginación en una historia de bendición e impacto histórico. La agencia personal y la acción virtuosa pueden atraer el favor y crear giros inesperados en la vida.</p>
+                    `
+                },
+                 daniel: {
+                    title: "Daniel: Integridad en el Exilio",
+                    content: `
+                        <p class="mb-4"><b>Vivencia:</b> Joven noble exiliado en Babilonia, fue seleccionado para servir en la corte real. Se enfrentó a la presión de asimilarse a una cultura con prácticas que contradecían su fe, como las leyes dietéticas. Decidió no "contaminarse" y negoció una alternativa.</p>
+                        <p class="mb-4"><b>Impacto y Afrontamiento:</b> Su mecanismo de afrontamiento fue un compromiso firme con sus principios, pero ejecutado con sabiduría y respeto en lugar de rebelión abierta. Se apoyó en sus amigos, quienes compartían sus convicciones.</p>
+                        <p><b>Implicaciones:</b> Es posible mantener las creencias fundamentales en una cultura hostil. Pequeños actos de fidelidad, manejados con sabiduría diplomática, pueden tener grandes repercusiones, ganar respeto y demostrar el valor de las propias convicciones.</p>
+                    `
+                },
+                 sansón: {
+                    title: "Sansón: Dones y Debilidades",
+                    content: `
+                        <p class="mb-4"><b>Vivencia:</b> Nacido con una fuerza sobrenatural y un propósito divino, su vida estuvo marcada por decisiones impulsivas y una sumisión a sus debilidades personales, especialmente en sus relaciones. Esto lo llevó a la traición, la pérdida de su don, la ceguera y la esclavitud.</p>
+                        <p class="mb-4"><b>Impacto y Afrontamiento:</b> Un sentido de invencibilidad fomentó su imprudencia. La pérdida de su fuerza fue un golpe psicológico devastador. Su afrontamiento final fue un retorno desesperado a la dependencia de Dios en un momento de impotencia absoluta.</p>
+                        <p><b>Implicaciones:</b> Los dones extraordinarios y un propósito divino no anulan la responsabilidad personal. La falta de autodisciplina puede socavar el mayor de los potenciales. Sin embargo, incluso una vida de fracasos puede, en última instancia, cumplir un propósito mayor, aunque sea de forma trágica.</p>
+                    `
+                }
+            };
+            
+            const modal = document.getElementById('archetype-modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalCloseButton = document.getElementById('modal-close-button');
+            const archetypeCards = document.querySelectorAll('.card-archetype');
+
+            archetypeCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const archetypeKey = card.dataset.archetype;
+                    const data = archetypesData[archetypeKey];
+                    if (data) {
+                        modalContent.innerHTML = `
+                            <h2 class="text-3xl font-bold mb-4 text-[#3A3A3A]">${data.title}</h2>
+                            <div class="prose max-w-none text-gray-600">${data.content}</div>
+                        `;
+                        modal.classList.remove('opacity-0', 'pointer-events-none');
+                        modal.querySelector('div').classList.remove('scale-95');
+                    }
+                });
+            });
+
+            const closeModal = () => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modal.querySelector('div').classList.add('scale-95');
+            };
+
+            modalCloseButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
